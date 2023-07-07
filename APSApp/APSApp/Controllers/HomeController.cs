@@ -23,7 +23,7 @@ public class HomeController : Controller
     [HttpGet]
     public IActionResult Result()
     {
-        return View();
+        return Index();
     }
 
     [HttpPost]
@@ -36,6 +36,11 @@ public class HomeController : Controller
             ms.Seek(0, SeekOrigin.Begin);
 
             ImageAnalysis analysis = await _computerVisionClient.AnalyzeImageInStreamAsync(ms);
+
+            if (Request.IsAjaxRequest())
+            {
+                return PartialView("ResultPartial", analysis);
+            }
 
             return View("Result", analysis);
         }
@@ -50,4 +55,11 @@ public class HomeController : Controller
 
 }
 
+public static class HttpRequestExtensions
+{
+    public static bool IsAjaxRequest(this HttpRequest request)
+    {
+        return request.Headers["X-Requested-With"] == "XMLHttpRequest";
+    }
+}
 

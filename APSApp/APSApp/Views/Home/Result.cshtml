@@ -7,7 +7,7 @@
     @Model.Description.Captions.FirstOrDefault()?.Text
 </p>
 <ul>
-    <strong>Tags:</strong>
+    <>Tags:</>
     @foreach (var tag in Model.Tags)
     {
         <li>@tag.Name</li>

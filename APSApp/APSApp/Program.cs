@@ -1,5 +1,8 @@
 ﻿using Azure;
 using Microsoft.Azure.CognitiveServices.Vision.ComputerVision;
+using APSApp.Controllers;
+using APSApp.Models;
+using ApiKeyServiceClientCredentials = Microsoft.Azure.CognitiveServices.Vision.ComputerVision.ApiKeyServiceClientCredentials;
 
 var builder = WebApplication.CreateBuilder(args);
 

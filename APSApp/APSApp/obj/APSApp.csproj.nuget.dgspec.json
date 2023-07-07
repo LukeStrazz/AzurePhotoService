@@ -49,6 +49,10 @@
               "target": "Package",
               "version": "[4.0.0, )"
             },
+            "Azure.AI.Vision.ImageAnalysis": {
+              "target": "Package",
+              "version": "[0.13.0-beta.1, )"
+            },
             "Microsoft.Azure.CognitiveServices.Vision.ComputerVision": {
               "target": "Package",
               "version": "[7.0.1, )"

@@ -1,10 +1,12 @@
 {
   "version": 2,
-  "dgSpecHash": "LmUuV0TS8QxGlL5QI0gBM07pDQQLA7dD6sMaQoX6Ai6hr+F2NAhbLDOC6VRggSAPD2njs2GVfeTS8u8Iil4tdA==",
+  "dgSpecHash": "FOorymWwi5QR1HQN+tDBbWnD9PYTc/qODNyqn02H5jYIwF5E8zbMK1nlWWuroRXtAFcJqN74Jw53jNkztPymwQ==",
   "success": true,
   "projectFilePath": "C:\\Users\\Luke\\source\\repos\\AzurePhotoService\\APSApp\\APSApp\\APSApp.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Luke\\.nuget\\packages\\azure.ai.formrecognizer\\4.0.0\\azure.ai.formrecognizer.4.0.0.nupkg.sha512",
+    "C:\\Users\\Luke\\.nuget\\packages\\azure.ai.vision.common\\0.13.0-beta.1\\azure.ai.vision.common.0.13.0-beta.1.nupkg.sha512",
+    "C:\\Users\\Luke\\.nuget\\packages\\azure.ai.vision.imageanalysis\\0.13.0-beta.1\\azure.ai.vision.imageanalysis.0.13.0-beta.1.nupkg.sha512",
     "C:\\Users\\Luke\\.nuget\\packages\\azure.core\\1.25.0\\azure.core.1.25.0.nupkg.sha512",
     "C:\\Users\\Luke\\.nuget\\packages\\microsoft.azure.cognitiveservices.vision.computervision\\7.0.1\\microsoft.azure.cognitiveservices.vision.computervision.7.0.1.nupkg.sha512",
     "C:\\Users\\Luke\\.nuget\\packages\\microsoft.bcl.asyncinterfaces\\1.1.1\\microsoft.bcl.asyncinterfaces.1.1.1.nupkg.sha512",
