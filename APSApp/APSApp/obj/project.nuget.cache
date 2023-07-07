@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "yYJ/SApOKemfgeYfDpL0ZMmWZxFpQE0UXKeNnvIA2/UcW7gTjIMQ3ejBtD2SDmUyIPxPo4mgBr7r4MsAUCd2ZA==",
+  "dgSpecHash": "cjSNNhZBNv7r99v93ilEnNm04pxnRe0NQp8v+aNalt8ps6HUVY65nPHjZJ8Gn2vWT3viv6fqWkQgULI+/CG94A==",
   "success": true,
-  "projectFilePath": "/Users/luke-angelostrazzera/Projects/AzurePhotoService/APSApp/APSApp/APSApp.csproj",
+  "projectFilePath": "C:\\Users\\Luke\\source\\repos\\AzurePhotoService\\APSApp\\APSApp\\APSApp.csproj",
   "expectedPackageFiles": [],
   "logs": []
 }
