@@ -3,12 +3,17 @@ using Microsoft.AspNetCore.Mvc;
 using APSApp.Models;
 using Microsoft.Azure.CognitiveServices.Vision.ComputerVision;
 using Microsoft.Azure.CognitiveServices.Vision.ComputerVision.Models;
+using System.Net;
+using Microsoft.AspNetCore.DataProtection.KeyManagement;
+using Microsoft.AspNetCore.Http;
 
 namespace APSApp.Controllers;
 
 public class HomeController : Controller
 {
     private readonly IComputerVisionClient _computerVisionClient;
+    private static string _subscriptionKey = Environment.GetEnvironmentVariable("VISION_KEY");
+    private static string _endpoint = Environment.GetEnvironmentVariable("VISION_ENDPOINT");
 
     public HomeController(IComputerVisionClient computerVisionClient)
     {
@@ -20,40 +25,41 @@ public class HomeController : Controller
     {
         return View();
     }
-    [HttpGet]
-    public IActionResult Result()
-    {
-        return Index();
-    }
+
 
     [HttpPost]
     public async Task<IActionResult> AnalyzeImage(ImageUpload model)
     {
-        if (ModelState.IsValid && model.IsValid)
+        if (ModelState.IsValid)
         {
-            using var ms = new MemoryStream();
-            await model.ImageFile.CopyToAsync(ms);
-            ms.Seek(0, SeekOrigin.Begin);
+            ComputerVisionClient client = Authenticate(_endpoint, _subscriptionKey);
 
-            ImageAnalysis analysis = await _computerVisionClient.AnalyzeImageInStreamAsync(ms);
+            List<VisualFeatureTypes?> features = new List<VisualFeatureTypes?>()
+        {
+            VisualFeatureTypes.Tags
+        };
+
+            ImageAnalysis results = await client.AnalyzeImageAsync(model.ImageUrl, visualFeatures: features);
 
             if (Request.IsAjaxRequest())
             {
-                return PartialView("ResultPartial", analysis);
+                return PartialView("ResultPartial", results);
             }
 
-            return View("Result", analysis);
+            return View("Result", results);
         }
 
-        if (!model.IsValid)
-        {
-            ModelState.AddModelError("ImageFile", "The file must be a .jpg, .jpeg, .png, .gif, .bmp and less than 5MB");
-        }
-
-        return View("Index", model);
+        return View("Result", model);
+    }
+    public ComputerVisionClient Authenticate(string endpoint, string key)
+    {
+        ComputerVisionClient client = new ComputerVisionClient(new ApiKeyServiceClientCredentials(key))
+        { Endpoint = endpoint };
+        return client;
     }
 
 }
+
 
 public static class HttpRequestExtensions
 {

@@ -1,30 +1,37 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using System.Xml.Linq;
+using System;
 
-namespace APSApp.Models;
-
-public class ImageUpload
+namespace APSApp.Models
 {
-    private static readonly string[] AllowedExtensions = new[] { ".jpg", ".jpeg", ".png", ".gif", ".bmp" };
-    private const long MaxFileSize = 5 * 1024 * 1024; // 5 MB
-
-    [Required]
-    [Display(Name = "Upload Image")]
-    public IFormFile ImageFile { get; set; }
-
-    public bool IsValid
+    public class ImageUpload
     {
-        get
+        [Required]
+        [Display(Name = "Image URL")]
+        public string ImageUrl { get; set; }
+
+        public bool IsValid
         {
-            if (ImageFile == null) return false;
+            get
+            {
+                if (string.IsNullOrWhiteSpace(ImageUrl))
+                {
+                    Console.WriteLine("ImageUrl is null or white space");
+                    return false;
+                }
 
-            var ext = Path.GetExtension(ImageFile.FileName).ToLowerInvariant();
-            if (string.IsNullOrEmpty(ext) || !AllowedExtensions.Contains(ext)) return false;
+                Uri uriResult;
+                bool isUrl = Uri.TryCreate(ImageUrl, UriKind.Absolute, out uriResult)
+                    && (uriResult.Scheme == Uri.UriSchemeHttp || uriResult.Scheme == Uri.UriSchemeHttps);
 
-            if (ImageFile.Length > MaxFileSize) return false;
+                if (!isUrl)
+                {
+                    Console.WriteLine("Invalid URL: " + ImageUrl);
+                    return false;
+                }
 
-            return true;
+                Console.WriteLine("URL is valid");
+                return true;
+            }
         }
     }
 }
-

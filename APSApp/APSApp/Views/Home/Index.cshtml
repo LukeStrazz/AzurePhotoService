@@ -1,12 +1,13 @@
 ﻿@model ImageUpload
-
-<form id="uploadForm" asp-action="AnalyzeImage" method="post" enctype="multipart/form-data">
+<form id="uploadForm" asp-action="AnalyzeImage" method="post">
     <div>
-        <label asp-for="ImageFile">Upload Image:</label>
-        <input asp-for="ImageFile" type="file" id="imageFileInput" />
+        <label asp-for="ImageUrl">Image URL:</label>
+        <input asp-for="ImageUrl" type="text" />
     </div>
     <button type="submit">Analyze</button>
 </form>
+
+
 <br /><br />
 
 
