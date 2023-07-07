@@ -1,0 +1,15 @@
+﻿@using Microsoft.Azure.CognitiveServices.Vision.ComputerVision.Models
+@model ImageAnalysis
+
+<h2>Image Analysis</h2>
+<p>
+    <strong>Description:</strong>
+    @Model.Description.Captions.FirstOrDefault()?.Text
+</p>
+<ul>
+    <strong>Tags:</strong>
+    @foreach (var tag in Model.Tags)
+    {
+        <li>@tag.Name</li>
+    }
+</ul>

@@ -1,7 +1,22 @@
-﻿var builder = WebApplication.CreateBuilder(args);
+﻿using Azure;
+using Microsoft.Azure.CognitiveServices.Vision.ComputerVision;
 
-// Add services to the container.
+var builder = WebApplication.CreateBuilder(args);
+
 builder.Services.AddControllersWithViews();
+builder.Services.AddHttpClient();
+
+// Adding Azure Computer Vision service.
+builder.Services.AddSingleton<IComputerVisionClient>(provider =>
+{
+    var key = builder.Configuration["Azure:ComputerVision:SubscriptionKey"];
+    var endpoint = builder.Configuration["Azure:ComputerVision:Endpoint"];
+
+    return new ComputerVisionClient(new ApiKeyServiceClientCredentials(key))
+    {
+        Endpoint = endpoint
+    };
+});
 
 var app = builder.Build();
 

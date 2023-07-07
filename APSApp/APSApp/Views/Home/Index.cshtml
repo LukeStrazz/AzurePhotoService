@@ -1,9 +1,9 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
-}
+﻿@model ImageUpload
 
-<div class="text-center">
-    <h1 class="display-4">Azure Photo Service</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
-
+<form asp-action="AnalyzeImage" method="post" enctype="multipart/form-data">
+    <div>
+        <label asp-for="ImageFile">Upload Image:</label>
+        <input asp-for="ImageFile" type="file" />
+    </div>
+    <button type="submit">Analyze</button>
+</form>
