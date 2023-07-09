@@ -12,8 +12,8 @@ namespace APSApp.Controllers;
 public class HomeController : Controller
 {
     private readonly IComputerVisionClient _computerVisionClient;
-    private static string _subscriptionKey = Environment.GetEnvironmentVariable("VISION_KEY");
-    private static string _endpoint = Environment.GetEnvironmentVariable("VISION_ENDPOINT");
+    private static string _subscriptionKey = "YOUR-KEY";
+    private static string _endpoint = "YOUR-ENDPOINT";
 
     public HomeController(IComputerVisionClient computerVisionClient)
     {
@@ -36,7 +36,8 @@ public class HomeController : Controller
 
             List<VisualFeatureTypes?> features = new List<VisualFeatureTypes?>()
         {
-            VisualFeatureTypes.Tags
+            VisualFeatureTypes.Tags,
+            VisualFeatureTypes.Description
         };
 
             ImageAnalysis results = await client.AnalyzeImageAsync(model.ImageUrl, visualFeatures: features);

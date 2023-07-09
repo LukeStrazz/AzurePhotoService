@@ -4,7 +4,11 @@
 <h2>Image Analysis</h2>
 <p>
     <strong>Description:</strong>
-    @Model.Description.Captions.FirstOrDefault()?.Text
+    @if (Model.Description != null)
+    {
+        @Model.Description.Captions.FirstOrDefault()?.Text
+    }
+
 </p>
 <ul>
     <>Tags:</>
