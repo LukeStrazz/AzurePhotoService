@@ -1,19 +1,55 @@
 ﻿@using Microsoft.Azure.CognitiveServices.Vision.ComputerVision.Models
-@model ImageAnalysis
+@model object
 
 <h2>Image Analysis</h2>
-<p>
-    <strong>Description:</strong>
-    @if (Model.Description != null)
-    {
-        @Model.Description.Captions.FirstOrDefault()?.Text
-    }
 
-</p>
-<ul>
-    <>Tags:</>
-    @foreach (var tag in Model.Tags)
+@{
+    var imageAnalysis = Model as ImageAnalysis;
+    var imageUpload = Model as APSApp.Models.ImageUpload;
+}
+
+@if (imageAnalysis != null)
+{
+    if (ViewData.ModelState.IsValid)
     {
-        <li>@tag.Name</li>
+        <p>
+            <strong>Description:</strong>
+            @if (imageAnalysis.Description != null)
+            {
+                @imageAnalysis.Description.Captions.FirstOrDefault()?.Text
+            }
+        </p>
+        <ul>
+            Tags:
+            @foreach (var tag in imageAnalysis.Tags)
+            {
+                <li>@tag.Name</li>
+            }
+        </ul>
     }
-</ul>
+    else
+    {
+        <div class="alert alert-danger">
+            <strong>Error:</strong>
+            <p>Failed to analyze the image.</p>
+        </div>
+    }
+}
+
+@if (imageUpload != null)
+{
+    if (!imageUpload.IsValidUrl)
+    {
+        <div class="alert alert-danger">
+            <strong>Error:</strong>
+            <p>The provided URL is not valid.</p>
+        </div>
+    }
+    else
+    {
+        <div class="alert alert-danger">
+            <strong>Error:</strong>
+            <p>An error occurred while analyzing the image.</p>
+        </div>
+    }
+}

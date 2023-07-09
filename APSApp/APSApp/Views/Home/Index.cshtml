@@ -17,23 +17,18 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
 <script>
-    // Listen for changes to the file input field
     document.querySelector('#ImageFile').addEventListener('change', function (e) {
-        // Get the file size in MB
         const fileSize = e.target.files[0].size / 1024 / 1024;
-        // If the file is bigger than 5 MB, disable the submit button and show a warning
         if (fileSize > 5) {
             document.querySelector('#analyzeButton').disabled = true;
             alert('File size exceeds 5 MB. Please choose a smaller file.');
         } else {
-            // Otherwise, enable the submit button
             document.querySelector('#analyzeButton').disabled = false;
         }
     });
 
     $(document).ready(function () {
         $('#imageFileInput').on('change', function () {
-            // Log to console when a file is selected
             var filename = $(this).val().split('\\').pop();
             console.log('File selected: ' + filename);
         });
@@ -41,7 +36,7 @@
         $('#uploadForm').on('submit', function (event) {
             event.preventDefault();
 
-            console.log('Form submitted. Uploading file...'); // Log to console when the form is submitted
+            console.log('Form submitted. Uploading file...'); 
 
             var formData = new FormData(this);
 
@@ -52,11 +47,11 @@
                 processData: false,
                 contentType: false,
                 success: function (data) {
-                    console.log('Upload successful!'); // Log to console when the upload is successful
+                    console.log('Upload successful!');
                     $('#results').html(data);
                 },
                 error: function (xhr, status, error) {
-                    console.error('An error occurred during upload: ' + error); // Log to console when an error occurs during upload
+                    console.error('An error occurred during upload: ' + error);
                     $('#results').html("error");
                 },
             });

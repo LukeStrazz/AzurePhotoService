@@ -1,5 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
-using System;
+﻿using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace APSApp.Models
 {
@@ -9,13 +9,12 @@ namespace APSApp.Models
         [Display(Name = "Image URL")]
         public string ImageUrl { get; set; }
 
-        public bool IsValid
+        public bool IsValidUrl
         {
             get
             {
                 if (string.IsNullOrWhiteSpace(ImageUrl))
                 {
-                    Console.WriteLine("ImageUrl is null or white space");
                     return false;
                 }
 
@@ -23,14 +22,7 @@ namespace APSApp.Models
                 bool isUrl = Uri.TryCreate(ImageUrl, UriKind.Absolute, out uriResult)
                     && (uriResult.Scheme == Uri.UriSchemeHttp || uriResult.Scheme == Uri.UriSchemeHttps);
 
-                if (!isUrl)
-                {
-                    Console.WriteLine("Invalid URL: " + ImageUrl);
-                    return false;
-                }
-
-                Console.WriteLine("URL is valid");
-                return true;
+                return isUrl;
             }
         }
     }
