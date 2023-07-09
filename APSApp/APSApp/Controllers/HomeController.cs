@@ -38,7 +38,8 @@ public class HomeController : Controller
                 List<VisualFeatureTypes?> features = new List<VisualFeatureTypes?>()
             {
                 VisualFeatureTypes.Tags,
-                VisualFeatureTypes.Description
+                VisualFeatureTypes.Description,
+                VisualFeatureTypes.ImageType
             };
 
                 ImageAnalysis results = await client.AnalyzeImageAsync(model.ImageUrl, visualFeatures: features);

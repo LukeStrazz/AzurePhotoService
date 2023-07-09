@@ -23,7 +23,7 @@
             Tags:
             @foreach (var tag in imageAnalysis.Tags)
             {
-                <li>@tag.Name</li>
+                <li>"@tag.Name", Confidence: @tag.Confidence%</li>
             }
         </ul>
     }
