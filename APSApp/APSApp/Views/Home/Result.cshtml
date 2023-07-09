@@ -4,8 +4,10 @@
 <h2>Image Analysis</h2>
 
 @{
-    var imageAnalysis = Model as ImageAnalysis;
     var imageUpload = Model as APSApp.Models.ImageUpload;
+    var analysisViewModel = Model as dynamic;
+    var imageAnalysis = analysisViewModel?.AnalysisResult as ImageAnalysis;
+    var imageUrl = analysisViewModel?.ImageUrl;
 }
 
 @if (imageAnalysis != null)
@@ -19,11 +21,12 @@
                 @imageAnalysis.Description.Captions.FirstOrDefault()?.Text
             }
         </p>
+        <img id="analyzed-image" src="@imageUrl" alt="Analyzed image" />
         <ul>
             Tags:
             @foreach (var tag in imageAnalysis.Tags)
             {
-                <li>"@tag.Name", Confidence: @tag.Confidence%</li>
+                <li class="tag">"@tag.Name", Confidence: @tag.Confidence%</li>
             }
         </ul>
     }

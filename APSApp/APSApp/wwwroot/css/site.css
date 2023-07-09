@@ -20,3 +20,22 @@ html {
 body {
   margin-bottom: 60px;
 }
+
+#analyzed-image {
+    max-width: 50%;
+    height: auto;
+}
+
+.tag {
+    border: 1px solid black;
+    color: black;
+    padding: 5px;
+    margin: 5px;
+    display: inline-block;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+    .tag:hover {
+        background-color: blue;
+        color: white;
+    }

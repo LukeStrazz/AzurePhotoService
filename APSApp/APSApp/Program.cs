@@ -12,8 +12,8 @@ builder.Services.AddHttpClient();
 // Adding Azure Computer Vision service.
 builder.Services.AddSingleton<IComputerVisionClient>(provider =>
 {
-    var key = builder.Configuration["319fbc4c03f34fb391db3718e7713ca6"];
-    var endpoint = builder.Configuration["https://apsapp.cognitiveservices.azure.com/"];
+    var key = builder.Configuration["YOUR-SubscriptionKey"];
+    var endpoint = builder.Configuration["YOUR-Endpoint"];
 
     return new ComputerVisionClient(new ApiKeyServiceClientCredentials(key))
     {

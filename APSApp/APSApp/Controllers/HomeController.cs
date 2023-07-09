@@ -12,8 +12,8 @@ namespace APSApp.Controllers;
 public class HomeController : Controller
 {
     private readonly IComputerVisionClient _computerVisionClient;
-    private static string _subscriptionKey = "319fbc4c03f34fb391db3718e7713ca6";
-    private static string _endpoint = "https://apsapp.cognitiveservices.azure.com/";
+    private static string _subscriptionKey = "YOUR-SubscriptionKey";
+    private static string _endpoint = "YOUR-Endpoint";
 
     public HomeController(IComputerVisionClient computerVisionClient)
     {
@@ -44,7 +44,13 @@ public class HomeController : Controller
 
                 ImageAnalysis results = await client.AnalyzeImageAsync(model.ImageUrl, visualFeatures: features);
 
-                return View("Result", results);
+                var viewModel = new
+                {
+                    AnalysisResult = results,
+                    ImageUrl = model.ImageUrl
+                };
+
+                return View("Result", viewModel);
             }
             catch (ComputerVisionErrorResponseException ex) when (ex.Response.StatusCode == System.Net.HttpStatusCode.BadRequest)
             {
