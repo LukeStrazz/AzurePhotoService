@@ -31,16 +31,14 @@ public class HomeController : Controller
         {
             try
             {
-                ComputerVisionClient client = Authenticate(_endpoint, _subscriptionKey);
-
                 List<VisualFeatureTypes?> features = new List<VisualFeatureTypes?>()
-            {
-                VisualFeatureTypes.Tags,
-                VisualFeatureTypes.Description,
-                VisualFeatureTypes.ImageType
-            };
+        {
+            VisualFeatureTypes.Tags,
+            VisualFeatureTypes.Description,
+            VisualFeatureTypes.ImageType
+        };
 
-                ImageAnalysis results = await client.AnalyzeImageAsync(model.ImageUrl, visualFeatures: features);
+                ImageAnalysis results = await _computerVisionClient.AnalyzeImageAsync(model.ImageUrl, visualFeatures: features);
 
                 var viewModel = new
                 {
@@ -61,13 +59,6 @@ public class HomeController : Controller
         }
 
         return View("Result", model);
-    }
-
-    public ComputerVisionClient Authenticate(string endpoint, string key)
-    {
-        ComputerVisionClient client = new ComputerVisionClient(new ApiKeyServiceClientCredentials(key))
-        { Endpoint = endpoint };
-        return client;
     }
 
 }
