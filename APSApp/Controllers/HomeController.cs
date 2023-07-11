@@ -12,8 +12,6 @@ namespace APSApp.Controllers;
 public class HomeController : Controller
 {
     private readonly IComputerVisionClient _computerVisionClient;
-    private static string _subscriptionKey = "YOUR-SubscriptionKey";
-    private static string _endpoint = "YOUR-Endpoint";
 
     public HomeController(IComputerVisionClient computerVisionClient)
     {

@@ -12,8 +12,8 @@ builder.Services.AddHttpClient();
 // Adding Azure Computer Vision service.
 builder.Services.AddSingleton<IComputerVisionClient>(provider =>
 {
-    var key = builder.Configuration["YOUR-SubscriptionKey"];
-    var endpoint = builder.Configuration["YOUR-Endpoint"];
+    var key = builder.Configuration["Azure:ComputerVision:SubscriptionKey"];
+    var endpoint = builder.Configuration["Azure:ComputerVision:Endpoint"];
 
     return new ComputerVisionClient(new ApiKeyServiceClientCredentials(key))
     {
