@@ -1,4 +1,4 @@
-#AzurePhotoService - APS
+AzurePhotoService - APS 🤖 📸
 ------------------------
 
 This is a .NET MVC application that utilizes the Microsoft.Azure.CognitiveServices.Vision.ComputerVision library to perform image analysis. The app can analyze an image from a provided URL and retrieve information such as description and tags associated with the image.
