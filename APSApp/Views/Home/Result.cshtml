@@ -26,7 +26,7 @@
                 Tags:
                 @foreach (var tag in imageAnalysis.Tags)
                 {
-                    <li class="tag">"@tag.Name", Confidence: @tag.Confidence%</li>
+                    <li class="tag">"@tag.Name", Confidence: @String.Format("{0:0.00}", tag.Confidence * 100)%</li>
                 }
             </ul>
             <ul>
