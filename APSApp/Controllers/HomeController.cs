@@ -35,7 +35,11 @@ public class HomeController : Controller
         {
             VisualFeatureTypes.Tags,
             VisualFeatureTypes.Description,
-            VisualFeatureTypes.ImageType
+            VisualFeatureTypes.ImageType,
+            VisualFeatureTypes.Faces,
+            VisualFeatureTypes.Categories,
+            VisualFeatureTypes.Color,
+            VisualFeatureTypes.Adult
         };
 
                 ImageAnalysis results = await _computerVisionClient.AnalyzeImageAsync(model.ImageUrl, visualFeatures: features);
