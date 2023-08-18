@@ -33,7 +33,7 @@
                 Categories:
                 @foreach (var category in imageAnalysis.Categories)
                 {
-                    <li class="tag">"@category.Name", Score: @category.Score%</li>
+                    <li class="tag">"@category.Name", Score: @String.Format("{0:0.00}", category.Score * 100) %</li>
                 }
             </ul>
             <ul>
@@ -53,9 +53,9 @@
             </ul>
             <div>
                 Adult:
-                <a class="tag">Adult Score: "@imageAnalysis.Adult.AdultScore"</a>
-                <a class="tag">"Gore Score: @imageAnalysis.Adult.GoreScore"</a>
-                <a class="tag">"Racy Score: @imageAnalysis.Adult.RacyScore"</a>
+                <a class="tag">Adult Score: "@String.Format("{0:0.00}", imageAnalysis.Adult.AdultScore * 100)"</a>
+                <a class="tag">Gore Score: "@String.Format("{0:0.00}", imageAnalysis.Adult.GoreScore * 100)"</a>
+                <a class="tag">Racy Score: "@String.Format("{0:0.00}", imageAnalysis.Adult.RacyScore * 100)"</a>
             </div>
             <div>
                 Colors:
