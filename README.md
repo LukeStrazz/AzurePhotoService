@@ -1,7 +1,7 @@
 AzurePhotoService - APS 🤖 📸
 ------------------------
 
-This is a .NET MVC application that utilizes the Microsoft.Azure.CognitiveServices.Vision.ComputerVision library to perform image analysis. The app can analyze an image from a provided URL and retrieve information such as description and tags associated with the image.
+This is a .NET 7 MVC application that utilizes the Microsoft.Azure.CognitiveServices.Vision.ComputerVision library to perform image analysis. The app can analyze an image from a provided URL and retrieve information such as description and tags associated with the image.
 
 Prerequisites:
 Before running the application, ensure you have the following:
@@ -28,7 +28,7 @@ Run the application using Visual Studio's debugging tools or by pressing F5.
 
 The application should launch in your preferred web browser.
 
-#Usage:
+Usage:
 ----------
 
 Enter the URL of an image in the provided input field on the application's homepage.
@@ -45,6 +45,6 @@ If you encounter any issues while running the application, ensure that the requi
 Double-check the API Subscription Key and Endpoint.
 Verify that the provided image URL is valid and accessible.
 
-#License
+License:
 This project is licensed under the MIT License.
 ----------------------------------------------
