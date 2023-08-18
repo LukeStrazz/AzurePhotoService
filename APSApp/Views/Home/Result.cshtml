@@ -1,58 +1,92 @@
 ﻿@using Microsoft.Azure.CognitiveServices.Vision.ComputerVision.Models
 @model object
+<body>
+    <h2>Image Analysis</h2>
 
-<h2>Image Analysis</h2>
+    @{
+        var imageUpload = Model as APSApp.Models.ImageUpload;
+        var analysisViewModel = Model as dynamic;
+        var imageAnalysis = analysisViewModel?.AnalysisResult as ImageAnalysis;
+        var imageUrl = analysisViewModel?.ImageUrl;
+    }
 
-@{
-    var imageUpload = Model as APSApp.Models.ImageUpload;
-    var analysisViewModel = Model as dynamic;
-    var imageAnalysis = analysisViewModel?.AnalysisResult as ImageAnalysis;
-    var imageUrl = analysisViewModel?.ImageUrl;
-}
+    @if (imageAnalysis != null)
+    {
+        if (ViewData.ModelState.IsValid)
+        {
+            <p>
+                <strong>Description:</strong>
+                @if (imageAnalysis.Description != null)
+                {
+                    @imageAnalysis.Description.Captions.FirstOrDefault()?.Text
+                }
+            </p>
+            <img id="analyzed-image" src="@imageUrl" alt="Analyzed image" />
+            <ul>
+                Tags:
+                @foreach (var tag in imageAnalysis.Tags)
+                {
+                    <li class="tag">"@tag.Name", Confidence: @tag.Confidence%</li>
+                }
+            </ul>
+            <ul>
+                Categories:
+                @foreach (var category in imageAnalysis.Categories)
+                {
+                    <li class="tag">"@category.Name", Score: @category.Score%</li>
+                }
+            </ul>
+            <ul>
+                Face(s):
+                @if (imageAnalysis.Faces.Count < 1)
+                {
+                    <li class="tag">No face found.</li>
 
-@if (imageAnalysis != null)
-{
-    if (ViewData.ModelState.IsValid)
-    {
-        <p>
-            <strong>Description:</strong>
-            @if (imageAnalysis.Description != null)
-            {
-                @imageAnalysis.Description.Captions.FirstOrDefault()?.Text
-            }
-        </p>
-        <img id="analyzed-image" src="@imageUrl" alt="Analyzed image" />
-        <ul>
-            Tags:
-            @foreach (var tag in imageAnalysis.Tags)
-            {
-                <li class="tag">"@tag.Name", Confidence: @tag.Confidence%</li>
-            }
-        </ul>
+                }
+                else
+                {
+                    @foreach (var face in imageAnalysis.Faces)
+                    {
+                        <li class="tag">Face(s): "@face.Gender", Age: @face.Age,  Face Rectangle: @face.FaceRectangle </li>
+                    }
+                }
+            </ul>
+            <div>
+                Adult:
+                <a class="tag">Adult Score: "@imageAnalysis.Adult.AdultScore"</a>
+                <a class="tag">"Gore Score: @imageAnalysis.Adult.GoreScore"</a>
+                <a class="tag">"Racy Score: @imageAnalysis.Adult.RacyScore"</a>
+            </div>
+            <div>
+                Colors:
+                <a class="tag">"Dominant Background color: @imageAnalysis.Color.DominantColorBackground"</a>
+                <a class="tag">"Dominant Foreground color: @imageAnalysis.Color.DominantColorForeground"</a>
+            </div>
+        }
+        else
+        {
+            <div class="alert alert-danger">
+                <strong>Error:</strong>
+                <p>Failed to analyze the image.</p>
+            </div>
+        }
     }
-    else
-    {
-        <div class="alert alert-danger">
-            <strong>Error:</strong>
-            <p>Failed to analyze the image.</p>
-        </div>
-    }
-}
 
-@if (imageUpload != null)
-{
-    if (!imageUpload.IsValidUrl)
+    @if (imageUpload != null)
     {
-        <div class="alert alert-danger">
-            <strong>Error:</strong>
-            <p>The provided URL is not valid.</p>
-        </div>
+        if (!imageUpload.IsValidUrl)
+        {
+            <div class="alert alert-danger">
+                <strong>Error:</strong>
+                <p>The provided URL is not valid.</p>
+            </div>
+        }
+        else
+        {
+            <div class="alert alert-danger">
+                <strong>Error:</strong>
+                <p>An error occurred while analyzing the image.</p>
+            </div>
+        }
     }
-    else
-    {
-        <div class="alert alert-danger">
-            <strong>Error:</strong>
-            <p>An error occurred while analyzing the image.</p>
-        </div>
-    }
-}
+</body>
